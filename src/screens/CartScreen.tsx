@@ -1,22 +1,69 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
+import { View, Text, FlatList, StyleSheet } from 'react-native';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Cart'>;
+type CartItem = {
+  id: string;
+  name: string;
+  quantity: number;
+};
 
-export default function CartScreen({ navigation, route }: Props) {
+type CartScreenProps = {
+  cartItems: CartItem[];
+};
+
+const CartScreen: React.FC<CartScreenProps> = ({ cartItems }) => {
   return (
     <View style={styles.container}>
-      <Text>Cart Screen</Text>
+      <Text style={styles.heading}>🛒 Your Cart</Text>
+      {cartItems.length === 0 ? (
+        <Text style={styles.emptyText}>Your cart is empty.</Text>
+      ) : (
+        <FlatList
+          data={cartItems}
+          keyExtractor={(item) => item.id}
+          renderItem={({ item }) => (
+            <View style={styles.itemContainer}>
+              <Text style={styles.itemName}>{item.name}</Text>
+              <Text style={styles.itemQty}>Qty: {item.quantity}</Text>
+            </View>
+          )}
+        />
+      )}
     </View>
   );
-}
+};
+
+export default CartScreen;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#fff',
+  },
+  heading: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    marginBottom: 15,
+    color: '#333',
+  },
+  emptyText: {
+    fontSize: 16,
+    color: 'gray',
+    textAlign: 'center',
+    marginTop: 50,
+  },
+  itemContainer: {
+    padding: 15,
+    borderBottomWidth: 1,
+    borderColor: '#eee',
+  },
+  itemName: {
+    fontSize: 18,
+    fontWeight: '600',
+  },
+  itemQty: {
+    fontSize: 16,
+    color: '#555',
   },
 });

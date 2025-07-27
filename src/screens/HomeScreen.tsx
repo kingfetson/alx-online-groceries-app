@@ -1,22 +1,25 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { NativeStackScreenProps } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../types/navigation';
+import { View, Text, Button, StyleSheet } from 'react-native';
+import useCartStore from '../store/useCartStore';
 
-type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
+export default function HomeScreen() {
+  const addToCart = useCartStore((state) => state.addToCart);
 
-export default function HomeScreen({ navigation, route }: Props) {
+  const sampleItem = {
+    id: '1',
+    name: 'Fresh Apples',
+    price: 3.99,
+  };
+
   return (
     <View style={styles.container}>
-      <Text>Home Screen</Text>
+      <Text style={styles.title}>Home Screen 🏠</Text>
+      <Button title="Add to Cart" onPress={() => addToCart(sampleItem)} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  container: { flex: 1, justifyContent: 'center', alignItems: 'center' },
+  title: { fontSize: 20, fontWeight: 'bold', marginBottom: 20 },
 });
