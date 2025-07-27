@@ -104,3 +104,7 @@ Although this was a solo build, the project followed community-driven UI/UX idea
 
 ---
 
+npx expo install @react-navigation/native
+npx expo install react-native-screens react-native-safe-area-context react-native-gesture-handler react-native-reanimated react-native-vector-icons
+npx expo install @react-navigation/native-stack
+npx expo install @react-navigation/bottom-tabs
