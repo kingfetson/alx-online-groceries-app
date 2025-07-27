@@ -1,10 +1,4 @@
-export type RootStackParamList = {
-  Home: undefined;
-  Profile: undefined;
-  Search: undefined;
-  Cart: { cartItems: string[] }; // Example item type: string[]
-   ProductDetail: { productId: string }; // example screen with params
-};
+// src/types/navigation.ts
 
 export interface CartItem {
   id: string;
@@ -14,6 +8,8 @@ export interface CartItem {
 
 export type RootStackParamList = {
   Home: undefined;
+  Search: undefined;
   Cart: { cartItems: CartItem[] };
   Profile: undefined;
+  ProductDetail: { productId: string };
 };
