@@ -3,12 +3,17 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
-import ProfileScreen from '../screens/ProfileScreen';
 import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
-import ProfileStackNavigator from './ProfileStackNavigator';
+import ProfileStackNavigator from './ProfileStackNavigator'; // ✅ correct path
 
-const Tab = createBottomTabNavigator();
+type TabParamList = {
+  Home: undefined;
+  Cart: undefined;
+  Profile: undefined;
+};
+
+const Tab = createBottomTabNavigator<TabParamList>();
 
 const AppNavigator = () => {
   return (
@@ -16,10 +21,12 @@ const AppNavigator = () => {
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ color, size }) => {
-            let iconName: any;
+            let iconName: keyof typeof Ionicons.glyphMap = 'home';
+
             if (route.name === 'Home') iconName = 'home';
             else if (route.name === 'Cart') iconName = 'cart';
             else if (route.name === 'Profile') iconName = 'person';
+
             return <Ionicons name={iconName} size={size} color={color} />;
           },
           tabBarActiveTintColor: '#34C759',

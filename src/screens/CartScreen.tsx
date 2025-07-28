@@ -1,17 +1,10 @@
 import React from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
+import useCartStore from '@/store/useCartStore'; // adjust path if needed
 
-type CartItem = {
-  id: string;
-  name: string;
-  quantity: number;
-};
+const CartScreen: React.FC = () => {
+  const cartItems = useCartStore((state) => state.cartItems);
 
-type CartScreenProps = {
-  cartItems: CartItem[];
-};
-
-const CartScreen: React.FC<CartScreenProps> = ({ cartItems }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>🛒 Your Cart</Text>
@@ -24,7 +17,7 @@ const CartScreen: React.FC<CartScreenProps> = ({ cartItems }) => {
           renderItem={({ item }) => (
             <View style={styles.itemContainer}>
               <Text style={styles.itemName}>{item.name}</Text>
-              <Text style={styles.itemQty}>Qty: {item.quantity}</Text>
+              <Text style={styles.itemQty}>Price: ${item.price}</Text>
             </View>
           )}
         />
