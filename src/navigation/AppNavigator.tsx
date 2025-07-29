@@ -5,7 +5,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons } from '@expo/vector-icons';
 import HomeScreen from '../screens/HomeScreen';
 import CartScreen from '../screens/CartScreen';
-import ProfileStackNavigator from './ProfileStackNavigator'; // ✅ correct path
+import ProfileStackNavigator from './ProfileStackNavigator'; //
 
 type TabParamList = {
   Home: undefined;
