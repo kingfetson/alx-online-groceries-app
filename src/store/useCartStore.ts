@@ -18,11 +18,13 @@ const useCartStore = create<CartStore>((set) => ({
   cartItems: [],
   addToCart: (item) =>
     set((state) => ({
-      cartItems: [...state.cartItems, item],
+      cartItems: [...state.cartItems, { ...item, id: `${item.id}-${Date.now()}` }],
     })),
   removeFromCart: (id) =>
     set((state) => ({
-      cartItems: state.cartItems.filter((item) => item.id !== id),
+      cartItems: state.cartItems.filter((item, index) => 
+        index !== state.cartItems.findIndex(cartItem => cartItem.id === id)
+      ),
     })),
   clearCart: () => set({ cartItems: [] }),
 }));
